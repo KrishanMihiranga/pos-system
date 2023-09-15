@@ -72,7 +72,6 @@ body{
     background-color: #fff;
     height: 200px;
     margin-top: 15%;
-    border-radius: 50px;
 }
 body{
     background: url("../assets/image/sara-web-header-08.jpg")center no-repeat;
@@ -143,6 +142,94 @@ body{
     color: white;
     cursor: pointer;
     display: none;
+}
+.customer{
+    position: relative;
+    bottom: -60%;
+    padding: 20px 15%;
+}
+.customer p{
+    color: grey;
+    font-size: 60px;
+    font-weight: 600;
+    opacity: .5;
+}
+.C-Content{
+    background-color: #D9D9D9;
+    width: 68vw;
+    padding: 2%;
+}
+.sc-card{
+    width: 100%;
+    height: fit-content;
+    background-color: #fff;
+}
+.top-bar-sc-card{
+    width: 100%;
+    height: 40px;
+    background-color: #00B9EF;
+    padding-left: 5%;
+}
+.top-bar-sc-card p{
+    color: #fff;
+    opacity: 1;
+    font-size: 25px;
+}
+.sc-card-content{
+    padding: 5%;
+}
+#btns-search{
+margin-top: 3%;
+}
+#search-cus-table{
+    margin-top: 3%;
+}
+hr{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border: 5px solid #0CA3D6;
+    background-color: #0CA3D6;
+}
+.item{
+    position: relative;
+    bottom: -60%;
+    padding: 20px 15%;
+}
+.item p{
+    color: grey;
+    font-size: 60px;
+    font-weight: 600;
+    opacity: .5;
+}
+.I-Content{
+    background-color: #D9D9D9;
+    width: 68vw;
+    padding: 2%;
+}
+.sI-card{
+    width: 100%;
+    height: fit-content;
+    background-color: #fff;
+}
+.top-bar-si-card{
+    width: 100%;
+    height: 40px;
+    background-color: #00B9EF;
+    padding-left: 5%;
+}
+.top-bar-si-card p{
+    color: #fff;
+    opacity: 1;
+    font-size: 25px;
+}
+.si-card-content{
+    padding: 5%;
+}
+#btns-search-item{
+margin-top: 3%;
+}
+#search-item-table{
+    margin-top: 3%;
 }
 @media all and (max-width: 992px){
     .header{
