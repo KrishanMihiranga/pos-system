@@ -4,8 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POS System</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    
+
+    <header class="header">
+        <a href="#" class="logo">Logo</a>
+
+        <input type="checkbox" id="check">
+        <label for="check" class="icons">
+            <i class='bx bx-menu' id="menu-icon"></i>
+            <i class='bx bx-x' id="close-icon"></i>
+        </label>
+
+        <nav class="nav-bar">
+            <a href="#"style="--i:0;">Home</a>
+            <a href="#"style="--i:1;">Customer</a>
+            <a href="#"style="--i:2;">Item</a>
+            <a href="#"style="--i:3;">Order</a>
+        </nav>
+    </header>  
+
+    <div class="dashboard">
+        <div class="container">
+            <div class="row">
+                <div class="col col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="card-TC">
+                        <p>Total Customers</p>
+                        <div id="TC-footer"></div>
+                    </div>
+                    
+                </div>
+                <div class="col col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="card-TI">
+                        <p>Total Items</p>
+                        <div id="TI-footer"></div>
+                    </div>
+                </div>
+                <div class="col col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="card-TO">
+                        <p>Total Orders</p>
+                        <div id="TO-footer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="timeCard">
+
+                    </div>
+                </div>
+            </div>
+       </div>
+    </div>
+       
+ 
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
