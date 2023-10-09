@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS System</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <header class="header">
+        <a href="#" class="logo">Logo</a>
+
+        <input type="checkbox" id="check">
+        <label for="check" class="icons">
+            <i class='bx bx-menu' id="menu-icon"></i>
+            <i class='bx bx-x' id="close-icon"></i>
+        </label>
+
+        <nav class="nav-bar">
+            <a style="--i:0;" class="home-nav">Home</a>
+            <a style="--i:1;" class="customer-nav">Customer</a>
+            <a style="--i:2;" class="item-nav">Item</a>
+            <a style="--i:3;" class="order-nav">Order</a>
+        </nav>
+    </header>  
+
+    <div class="dashboard">
+        <div class="container">
+            <div class="row">
+                <div class="col col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="card-TC">
+                        <p>Total Customers</p>
+                        <div id="TC-footer"></div>
+                    </div>
+                    
+                </div>
+                <div class="col col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="card-TI">
+                        <p>Total Items</p>
+                        <div id="TI-footer"></div>
+                    </div>
+                </div>
+                <div class="col col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="card-TO">
+                        <p>Total Orders</p>
+                        <div id="TO-footer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div class="timeCard">
+
+                    </div>
+                </div>
+            </div>
+       </div>
+    </div>
+   
+    <div class="customer">
+        <p>Customer</p>
+        <div class="C-Content">
+            <div class="container">
+                    <div class="row">
+                        <div class="col col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-12 col-12">
+                            <div class="sc-card">
+                                <div class="top-bar-sc-card">
+                                    <p>Search customer</p>
+                                </div>
+                                <div class="sc-card-content">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Search customer by CID">
+                                      </div>
+                                      <button type="button" class="btn btn-outline-primary">Search</button>
+                                      <button type="button" class="btn btn-outline-danger">Delete</button>
+                                </div>
+                                
+
+                            </div>
+                        </div>
+                        <div class="col col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12" id="btns-search">
+                            <button type="button" class="btn btn-success">Add Customer</button>
+                            <button type="button" class="btn btn-warning">View All</button>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="search-cus-table">
+                            <table class="table">
+                                <thead class="table-light">
+                                        <tr>
+                                          <th scope="col">ID</th>
+                                          <th scope="col">Name</th>
+                                          <th scope="col">Salary</th>
+                                          <th scope="col">Address</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>25000</td>
+                                        <td>Panadura</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Mark</td>
+                                        <td>45000</td>
+                                        <td>Horana</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Mark</td>
+                                        <td>45000</td>
+                                        <td>Horana</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>Mark</td>
+                                        <td>45000</td>
+                                        <td>Horana</td>
+                                    </tr>
+                                    
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <div class="item">
+        <p>Item</p>
+        <div class="I-Content">
+            <div class="container">
+                    <div class="row">
+                        <div class="col col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-12 col-12">
+                            <div class="sI-card">
+                                <div class="top-bar-si-card">
+                                    <p>Search Item</p>
+                                </div>
+                                <div class="si-card-content">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Search item by Item code">
+                                      </div>
+                                      <button type="button" class="btn btn-outline-primary">Search</button>
+                                      <button type="button" class="btn btn-outline-danger">Delete</button>
+                                </div>
+                                
+
+                            </div>
+                        </div>
+                        <div class="col col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12" id="btns-search-item">
+                            <button type="button" class="btn btn-success">Add Item</button>
+                            <button type="button" class="btn btn-warning">View All</button>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="search-item-table">
+                            <table class="table">
+                                <thead class="table-light">
+                                        <tr>
+                                          <th scope="col">Code</th>
+                                          <th scope="col">Name</th>
+                                          <th scope="col">Quantity</th>
+                                          <th scope="col">Price</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Test</td>
+                                        <td>100</td>
+                                        <td>150.00</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Test</td>
+                                        <td>100</td>
+                                        <td>150.00</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Test</td>
+                                        <td>100</td>
+                                        <td>150.00</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>Test</td>
+                                        <td>100</td>
+                                        <td>150.00</td>
+                                    </tr>
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <div class="order">
+        <p>Order</p>
+        <div class="O-Content">
+            <div class="container">
+                <div class="row">
+                    <div class="col col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        
+                        <div class="order-card"> 
+                            <div class="top-bar-order-card">
+                                <p>Invoice Details</p>
+                            </div>
+                            <div>
+                               <form class="order-card-content">
+                                <div class="order-card-grid">
+                                    <div class="mb-3">
+                                        <label for="order-id" class="form-label">Order ID</label>
+                                        <input type="text" class="form-control" id="order-id">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="order-date" class="form-label">Date</label>
+                                        <input type="text" class="form-control" id="order-date">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="order-cus-id" class="form-label">customer ID</label>
+                                        <input type="text" class="form-control" id="order-cus-id">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="salary" class="form-label">Salary</label>
+                                        <input type="text" class="form-control" id="salary">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="order-cus-name" class="form-label">Customer Name</label>
+                                    <input type="text" class="form-control" id="order-cus-name">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="order-cus-id" class="form-label">Address</label>
+                                    <input type="text" class="form-control" id="order-cus-id">
+                                </div>
+                               </form>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="order-card order-card-b">
+
+                            <div class="top-bar-order-card">
+                                <p>Select Item</p>
+                            </div>
+                            <div>
+                               <form class="order-card-content">
+                                <div class="order-card-grid">
+                                    <div class="mb-3">
+                                        <label for="item-code" class="form-label">Item code</label>
+                                        <input type="text" class="form-control" id="item-code">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="item-price" class="form-label">Price</label>
+                                        <input type="text" class="form-control" id="item-price">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="item-qty-on-hand" class="form-label">Qty on hand</label>
+                                        <input type="text" class="form-control" id="item-qty-on-hand">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="item-order-qty" class="form-label">Order Qty</label>
+                                        <input type="text" class="form-control" id="item-order-qty">
+                                    </div>
+                                </div>
+                                <div class="item-card-b-sec-b">
+                                    <div class="mb-3">
+                                        <label for="item-name" class="form-label">Item Name</label>
+                                        <input type="text" class="form-control" id="item-name">
+                                    </div>
+                                    
+                                </div>
+                                <button type="button" class="btn btn-outline-success">Add to cart</button>
+                               </form>
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                    
+                    <div class="col col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="order-table">
+                            <table class="table">
+                                <thead class="table-light">
+                                        <tr>
+                                          <th scope="col">Item Code</th>
+                                          <th scope="col">Item Name</th>
+                                          <th scope="col">Price</th>
+                                          <th scope="col">Quantity</th>
+                                          <th scope="col">Total</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td scope="row">1</th>
+                                        <td>Test</td>
+                                        <td>100</td>
+                                        <td>10</td>
+                                        <td>150.00</td>
+                                    </tr>
+                                   
+                                    <tr>
+                                        <td scope="row">1</th>
+                                        <td>Test</td>
+                                        <td>100</td>
+                                        <td>10</td>
+                                        <td>150.00</td>
+                                    </tr>
+    
+                                    <tr>
+                                        <td scope="row">1</th>
+                                        <td>Test</td>
+                                        <td>100</td>
+                                        <td>10</td>
+                                        <td>150.00</td>
+                                    </tr>
+                                </tbody>
+                              </table>
+                    </div>
+                    
+                    <div class="col col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="order-card order-card-c">
+                            <div>
+                                <form class="order-card-c-content">
+                                 <div><h1>Total :</h1></div>
+                                 <div><h1>Sub Total :</h1></div>
+
+                                 <div class="order-card-c-grid">
+                                    <div class="mb-3">
+                                        <label for="order-cash" class="form-label">Cash</label>
+                                        <input type="text" class="form-control" id="order-cash">
+                                    </div>
+    
+                                    <div class="mb-3">
+                                        <label for="order-discount" class="form-label">Discount</label>
+                                        <input type="text" class="form-control" id="order-discount">
+                                    </div>
+    
+                                    <div class="mb-3">
+                                        <label for="order-balance" class="form-label">Balance</label>
+                                        <input type="text" class="form-control" id="order-balance">
+                                    </div>
+                                 </div>
+                                 <button type="button" class="btn btn-outline-success">Purchase</button>
+                                </form>
+                             </div>
+                             
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/jquery.min.js"></script>
+    <script src="script/script.js"></script>
+</body>
+</html>

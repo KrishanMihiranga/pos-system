@@ -1,0 +1,365 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(10px, 20px, 24px);
+}
+th{
+    font-size: clamp(10px, 14px, 24px);
+}
+tr{
+    font-size: clamp(10px, 14px, 24px);
+}
+td{
+    font-size: clamp(10px, 14px, 24px);
+}
+label{
+    font-size: clamp(10px, 14px, 24px);
+}
+.btn{
+    font-size: clamp(10px, 14px, 24px);
+}
+.form-control{
+    font-size: clamp(10px, 14px, 24px);
+}
+body{
+    background-color: #E9ECEF;
+ }
+
+.card-TC{
+    background-color: #00B9EF;
+    height: 150px;
+    margin-top: 10%;
+}
+.card-TI{
+    background-color: #009C51;
+    height: 150px;
+    margin-top: 10%;
+}
+.card-TO{
+    background-color: #E88A11;
+    height: 150px;
+    margin-top: 10%;
+}
+.card-TC p{
+    color: #fff;
+    font-weight: 600;
+    position: relative;
+    padding: 5%;
+    top: 50%;
+}
+.card-TI p{
+    color: #fff;
+    font-weight: 600;
+    position: relative;
+    padding: 5%;
+    top: 50%;
+}
+.card-TO p{
+    color: #fff;
+    font-weight: 600;
+    position: relative;
+    padding: 5%;
+    top: 50%;
+}
+#TC-footer{
+    width: 100%;
+    height: 20px;
+    background-color: #0CA3D6;
+    position: relative;
+    bottom: -30%;
+}
+#TI-footer{
+    width: 100%;
+    height: 20px;
+    background-color: #088B49;
+    position: relative;
+    bottom: -30%;
+}
+#TO-footer{
+    width: 100%;
+    height: 20px;
+    background-color: #D48013;
+    position: relative;
+    bottom: -30%;
+}
+.timeCard{
+    background-color: #fff;
+    height: 200px;
+    margin-top: 15%;
+}
+body{
+    background: url("../assets/image/sara-web-header-08.jpg")center no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.dashboard>.container>.row:first-child{
+    margin-top: 15%;
+}
+
+.customer{
+    position: relative;
+    bottom: -60%;
+    padding: 20px 15%;
+    margin-top: 5%;
+}
+.customer>p{
+    color: grey;
+    font-weight: 600;
+    font-size: clamp(30px, 60px, 80px);
+    opacity: .5;
+}
+.C-Content{
+    background-color: #D9D9D9;
+    width: 68vw;
+    padding: 2%;
+}
+.sc-card{
+    width: 100%;
+    height: fit-content;
+    background-color: #fff;
+}
+.top-bar-sc-card{
+    width: 100%;
+    height: 40px;
+    background-color: #00B9EF;
+    padding-left: 5%;
+}
+.top-bar-sc-card p{
+    color: #fff;
+    opacity: 1;
+}
+.sc-card-content{
+    padding: 5%;
+}
+#btns-search{
+margin-top: 3%;
+}
+#search-cus-table{
+    margin-top: 3%;
+}
+hr{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border: 5px solid #0CA3D6;
+    background-color: #0CA3D6;
+}
+.item{
+    position: relative;
+    bottom: -60%;
+    padding: 20px 15%;
+    margin-top: 5%;
+}
+.item>p{
+    color: grey;
+    font-weight: 600;
+    font-size: clamp(30px, 60px, 80px);
+    opacity: .5;
+}
+.I-Content{
+    background-color: #D9D9D9;
+    width: 68vw;
+    padding: 2%;
+}
+.sI-card{
+    width: 100%;
+    height: fit-content;
+    background-color: #fff;
+}
+.top-bar-si-card{
+    width: 100%;
+    height: 40px;
+    background-color: #00B9EF;
+    padding-left: 5%;
+}
+.top-bar-si-card p{
+    color: #fff;
+    opacity: 1;
+}
+.si-card-content{
+    padding: 5%;
+}
+#btns-search-item{
+margin-top: 3%;
+}
+#search-item-table{
+    margin-top: 3%;
+}
+.order{
+    position: relative;
+    bottom: -60%;
+    padding: 20px 15%;
+    margin-top: 5%;
+}
+.order>p{
+    color: grey;
+    font-size: clamp(30px, 60px, 80px);
+    font-weight: 600;
+    opacity: .5;
+}
+.O-Content{
+    background-color: #D9D9D9;
+    width: 68vw;
+    padding: 5%;
+}
+.order-card{
+    width: 100%;
+    height: fit-content;
+    background-color: #fff;
+}
+.order-card{
+    width: 100%;
+    height: fit-content;
+    background-color: #fff;
+}
+.top-bar-order-card{
+    width: 100%;
+    height: 40px;
+    background-color: #00B9EF;
+    padding-left: 5%;
+}
+.top-bar-order-card>p{
+    color: #fff;
+    opacity: 1;
+}
+.order-card-content{
+    padding: 5%;
+}
+.order-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }  
+.order-card-b{
+    margin-top: 20px;
+}
+.item-card-b-sec-b{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+.order-card-c{
+    margin-top: 20px;
+}
+.order-card-c-content{
+    padding: 5%;
+}
+#order-table{
+    margin-top: 5%;
+}
+.order-card-c-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+.header::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;   
+    background: rgba(0, 0, 0, .1);
+    backdrop-filter: blur(50px);
+    z-index: -1;
+}
+.header::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%; 
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .4),transparent);
+    transition: .5s;  
+}
+.header:hover::after{
+    left: 100%;
+}
+.logo{
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+}
+.nav-bar a{
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 2.5rem;
+    font-size: clamp(10px, 18px, 24px);
+    cursor: pointer;
+}
+.nav-bar a:hover{
+    color: #00B9EF;
+}
+#check{
+    display: none;
+}
+.icons{
+    position: absolute;
+    right: 5%;
+    font-size: clamp(15px, 18px, 24px);
+    color: white;
+    cursor: pointer;
+    display: none;
+}
+@media all and (max-width: 992px){
+    .header{
+        padding: 10px 5%;
+    }
+}
+@media all and (max-width: 768px){
+    .icons{
+        display: inline-flex;
+    }
+    #check:checked~.icons #menu-icon{
+        display: none;
+    }
+    .icons #close-icon{
+        display: none;
+    }
+    #check:checked~.icons #close-icon{
+        display: block;
+    }
+    .nav-bar{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background: rgba(0, 0, 0, .1);
+        backdrop-filter: blur(50px);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+        overflow: hidden;
+        transition: .3s ease;
+    }
+    #check:checked~.nav-bar{
+        height: 12.7rem;
+    }
+    .nav-bar a{
+        display: block;
+        margin: 1.5rem 0;
+        text-align: center;
+        transform: translateY(-50px);
+        opacity: 0;
+        transition: .3s ease;
+    }
+    #check:checked~.nav-bar a{
+        transform: translateY(0);
+        opacity: 1;
+        transition-delay: calc(.15s * var(--i));
+    }
+}
