@@ -71,9 +71,9 @@
                     </div>
                     <div class="sc-card-content">
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Search customer by CID">
+                            <input type="text" class="form-control" id="search-customer-input" placeholder="Search customer by CID">
                           </div>
-                          <button type="button" class="btn btn-outline-primary">Search</button>
+                          <button type="button" class="btn btn-outline-primary" id="btn-search-customer">Search</button>
                     </div>
                     
 
@@ -101,10 +101,10 @@
                         <input type="number" class="form-control black-border-1" id="cusSalary" placeholder="Rs: 000000.00">
                     </div>
                     <div class="buttons">
-                        <button type="button" class="btn btn-success">Save</button>
-                        <button type="button" class="btn btn-primary">Update</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
-                        <button type="button" type="reset" class="btn btn-warning">Reset</button>
+                        <button id="add-customer" type="button" class="btn btn-success">Save</button>
+                        <button id="btn-update-customer" type="button" class="btn btn-primary">Update</button>
+                        <button id="btn-delete-customer" type="button" class="btn btn-danger">Delete</button>
+                        <button id="reset-customer" type="reset" class="btn btn-warning">Reset</button>
                     </div>
                 </form>
             </div>
@@ -135,9 +135,9 @@
                     </div>
                     <div class="sc-card-content">
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Search Item by code">
+                            <input type="text" class="form-control" id="search-item-input" placeholder="Search Item by code">
                           </div>
-                          <button type="button" class="btn btn-outline-primary">Search</button>
+                          <button id="btn-search-item" type="button" class="btn btn-outline-primary">Search</button>
                     </div>
                     
 
@@ -169,7 +169,7 @@
                         <button id="item-save" type="button" class="btn btn-success mb-1">Save</button>
                         <button id="item-update" type="button" class="btn btn-primary mb-1">Update</button>
                         <button id="item-delete" type="button" class="btn btn-danger mb-1">Delete</button>
-                        <button type="button" type="reset" class="btn btn-warning">Reset</button>
+                        <button id="item-reset" type="reset" class="btn btn-warning">Reset</button>
                     </div>
                 </form>
             </div>
@@ -330,6 +330,96 @@
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="lib/jquery.min.js"></script>
-    <script src="script/script.js"></script>
+    <script type="module" src="controller/CustomerController.js"></script>
+    <script type="module" src="controller/ItemController.js"></script>
+    <script>     
+        $('.dashboard').css({
+            'display': 'block' 
+        });
+        $('.customer').css({
+            'display': 'none' 
+        });
+        $('.item').css({
+            'display': 'none' 
+        });
+        $('.order').css({
+            'display': 'none' 
+        });
+
+        $('.home-nav').on('click', ()=>{
+            $('body').css({
+                'background': "url('../assets/image/sara-web-header-08.jpg') center no-repeat",
+                'background-size': 'cover',
+                'height': '100vh'
+            });
+            
+            $('.dashboard').css({
+                'display': 'block' 
+            });
+            $('.customer').css({
+                'display': 'none' 
+            });
+            $('.item').css({
+                'display': 'none' 
+            });
+            $('.order').css({
+                'display': 'none' 
+            });
+        });
+        $('.customer-nav').on('click', ()=>{
+            $('body').css({
+                'background': 'none',
+                'height' :  '0'
+            });
+            $('.dashboard').css({
+                'display': 'none' 
+            });
+            $('.customer').css({
+                'display': 'block' 
+            });
+            $('.item').css({
+                'display': 'none' 
+            });
+            $('.order').css({
+                'display': 'none' 
+            });
+        });
+        $('.item-nav').on('click', ()=>{
+            $('body').css({
+                'background': 'none',
+                'height' :  '0'
+            });
+            $('.dashboard').css({
+                'display': 'none' 
+            });
+            $('.customer').css({
+                'display': 'none' 
+            });
+            $('.item').css({
+                'display': 'block' 
+            });
+            $('.order').css({
+                'display': 'none' 
+            });
+        });
+        $('.order-nav').on('click', ()=>{
+    $('body').css({
+        'background': 'none',
+        'height' :  '0'
+    });
+    $('.dashboard').css({
+        'display': 'none' 
+    });
+    $('.customer').css({
+        'display': 'none' 
+    });
+    $('.item').css({
+        'display': 'none' 
+    });
+    $('.order').css({
+        'display': 'block' 
+    });
+});
+    </script>
 </body>
 </html>
