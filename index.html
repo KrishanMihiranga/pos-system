@@ -188,6 +188,7 @@
             </div>
         </div>
         <hr>
+        
     </div>
 
     <div class="order">
@@ -205,19 +206,14 @@
             <div class="col container" id="customer-pane">
                 <div class="row"><h2>Customer Details</h2></div>
                 <form action="" class="row">
+                    
                     <div class="mb-3 col-lg-2 col-md-4 col-12">
                         <label for="orderCusId" class="form-label">Customer ID</label>
-                        <div class="dropdown" id="orderCusId">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="cusDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                select
-                            </button>
-                            <div id="cusDropdown" class="dropdown-menu" aria-labelledby="cusDropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action</a>
-                            </div>
-                        </div>
+                        <select id="orderCusId">
+                            <option value="">Select</option>
+                        </select>
                     </div>
-
-
+                    
                     <div class="mb-3 col-lg-4 col-md-8 col-12">
                         <label for="orderCusName" class="form-label">Customer Name</label>
                         <input type="text" class="form-control black-border-1" id="orderCusName">
@@ -328,11 +324,20 @@
     </div>
 
     </div>
+    
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="lib/jquery.min.js"></script>
     <script type="module" src="controller/CustomerController.js"></script>
     <script type="module" src="controller/ItemController.js"></script>
-    <script>     
+    <script type="module" src="controller/OrderController.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.dropdown-toggle').dropdown();
+        });
+    </script>
+    
+    <script>  
+       
         $('.dashboard').css({
             'display': 'block' 
         });
