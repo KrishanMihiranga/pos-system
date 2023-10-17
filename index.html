@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POS System</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/styles.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -24,6 +24,7 @@
             <a style="--i:1;" class="customer-nav">Customer</a>
             <a style="--i:2;" class="item-nav">Item</a>
             <a style="--i:3;" class="order-nav">Order</a>
+            <a style="--i:4;" class="orderLog-nav">OrderLog</a>
         </nav>
     </header>  
 
@@ -195,11 +196,11 @@
         <p>Order</p>
         <div class="row mb-3" id="order-top">
             <div class="col-2">
-                <label>Order ID:</label>
+                <label id="order-id-lbl">Order ID:</label>
             </div>
             <div class="col-8"></div>
             <div class="col-2">
-                <label>Order Date:</label>
+                <label id="order-date-lbl">Order Date:</label>
             </div>
         </div>
         <div class="row mb-3">
@@ -209,10 +210,14 @@
                     
                     <div class="mb-3 col-lg-2 col-md-4 col-12">
                         <label for="orderCusId" class="form-label">Customer ID</label>
-                        <select id="orderCusId">
-                            <option value="">Select</option>
-                        </select>
+                        <div class="dropdown" id="orderCusId">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="cusDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">select</button>
+                            <div id="cusDropdown" class="dropdown-menu" aria-labelledby="cusDropdownMenuButton">
+                                <a class="dropdown-item" href="#">Action</a>
+                            </div>
+                        </div>
                     </div>
+                    
                     
                     <div class="mb-3 col-lg-4 col-md-8 col-12">
                         <label for="orderCusName" class="form-label">Customer Name</label>
@@ -235,13 +240,11 @@
                 <div class="row"><h2>Item Details</h2></div>
                 <form action="" class="row">
                     <div class="mb-3 col-lg-2 col-md-4">
-                        <label for="OrderItemId" class="form-label">Item ID</label>
+                        <label for="OrderItemId" class="form-label">Item Code</label>
                         <div class="dropdown" id="orderItemId">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="itemDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                select
-                            </button>
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="itemDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">select</button>
                             <div id="itemDropdown" class="dropdown-menu" aria-labelledby="itemDropdownMenuButton">
-                                <li>Home</li>
+                                
                             </div>
                         </div>
                     </div>
@@ -263,7 +266,8 @@
                     </div>
 
                     <div class="mb-3 col-lg-4 col-3">
-                        <button id="add-item-btn" type="button" class="btn btn-primary mb-1 black-border-1">Add to cart</button>
+                        <label for="add-item-btn" class="form-label" style="color: #fff;">.</label><br>
+                        <button id="add-item-btn" type="button" class="btn btn-primary mb-1 black-border-1">Add to cart <i class='bx bx-cart-add'></i></button>
                     </div>
 
                 </form>
@@ -277,7 +281,7 @@
                             <label class="total">Total:</label>
                         </div>
                         <div class="col col-12">
-                            <label id="subTotal" class="total">Sub Total:</label>
+                            <label id="subTotal">Sub Total:</label>
                         </div>
                     </div>
 
@@ -296,8 +300,8 @@
                         </div>
 
                         <div class="mb-3 col-lg-6 col-md-5">
-                            <label for="order-btn" class="form-label" style="color: #009C51;">status</label><br>
-                            <button id="order-btn" type="submit" class="btn btn-success mb-1 black-border-1">Purchase</button>
+                            <label for="order-btn" class="form-label" style="color: #fff;">.</label><br>
+                            <button id="order-btn" type="button" class="btn btn-success mb-1 black-border-1">Purchase <i class='bx bxs-credit-card'></i></button>
                         </div>
                     </div>
 
@@ -325,19 +329,88 @@
 
     </div>
     
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <div class="orderLog">
+        <p>Order Log</p>
+        <div class="row">
+            <div class="col col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-12 col-12">
+                <div class="sc-card">
+                    <div class="top-bar-sc-card">
+                        <p>Search Order</p>
+                    </div>
+                    <div class="sc-card-content">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="search-orderlog-input" placeholder="Search Order by OID">
+                          </div>
+                          <button type="button" class="btn btn-outline-primary" id="btn-search-orderlog">Search</button>
+                          <button type="button" class="btn btn-success" id="showlog">Show all</button>
+                    </div>
+                    
+
+                </div>
+            </div>
+        </div>
+        
+        <div class="row" id="order-log">
+            
+            <div class="col col-lg-6 col-md-6 col-6 container">
+               
+                <table class="table table-bordered" id="orderLogTable">
+                    <thead>
+                    <th>Order Id</th>
+                    <th>Order Date</th>
+                    <th>Customer Id</th>
+                    <th>Discount</th>
+                    <th>Total</th>
+                    </thead>
+
+                    <tbody id="orderLogTbody">
+                    </tbody>
+                </table>
+                
+            </div>
+            <div class="col col-lg-6 col-md-6 col-6 container">
+                
+                <div id="order-log-details">
+                    <div class="mb-3">
+                        <label for="OlcusName" class="form-label">Customer Name</label>
+                        <input type="text" class="form-control" id="OlcusName">
+                        <label for="OlcusName" class="form-label">Customer Address</label>
+                        <input type="text" class="form-control" id="OlcusAddress">
+                        <label for="OlcusName" class="form-label">Customer Salary</label>
+                        <input type="text" class="form-control" id="OlcusSalary">
+                    </div>
+    
+                    <table class="table table-bordered" >
+                        <thead>
+                        <th>Item ID</th>
+                        <th>Item Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        </thead>
+    
+                        <tbody id="orderLogitemTbody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+                
+            
+        </div>
+        <hr>
+    </div>
     <script src="lib/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
     <script type="module" src="controller/CustomerController.js"></script>
     <script type="module" src="controller/ItemController.js"></script>
     <script type="module" src="controller/OrderController.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.dropdown-toggle').dropdown();
-        });
-    </script>
+    <script type="module" src="controller/OrderLogController.js"></script>
     
     <script>  
-       
+    
         $('.dashboard').css({
             'display': 'block' 
         });
@@ -350,7 +423,10 @@
         $('.order').css({
             'display': 'none' 
         });
-
+        $('.orderLog').css({
+            'display': 'none' 
+        });
+        
         $('.home-nav').on('click', ()=>{
             $('body').css({
                 'background': "url('../assets/image/sara-web-header-08.jpg') center no-repeat",
@@ -370,6 +446,9 @@
             $('.order').css({
                 'display': 'none' 
             });
+            $('.orderLog').css({
+            'display': 'none' 
+            });
         });
         $('.customer-nav').on('click', ()=>{
             $('body').css({
@@ -387,6 +466,9 @@
             });
             $('.order').css({
                 'display': 'none' 
+            });
+            $('.orderLog').css({
+            'display': 'none' 
             });
         });
         $('.item-nav').on('click', ()=>{
@@ -406,25 +488,57 @@
             $('.order').css({
                 'display': 'none' 
             });
+            $('.orderLog').css({
+            'display': 'none' 
+            });
         });
+  
         $('.order-nav').on('click', ()=>{
-    $('body').css({
-        'background': 'none',
-        'height' :  '0'
-    });
-    $('.dashboard').css({
-        'display': 'none' 
-    });
-    $('.customer').css({
-        'display': 'none' 
-    });
-    $('.item').css({
-        'display': 'none' 
-    });
-    $('.order').css({
-        'display': 'block' 
-    });
+
+            $('body').css({
+                'background': 'none',
+                'height' :  '0'
+            });
+            $('.dashboard').css({
+                'display': 'none' 
+            });
+            $('.customer').css({
+                'display': 'none' 
+            });
+            $('.item').css({
+                'display': 'none' 
+            });
+            $('.order').css({
+            'display': 'block' 
+            });
+            $('.orderLog').css({
+                'display': 'none' 
+            });
+        });
+        
+        $('.orderLog-nav').on('click', ()=>{
+
+$('body').css({
+    'background': 'none',
+    'height' :  '0'
 });
+$('.dashboard').css({
+    'display': 'none' 
+});
+$('.customer').css({
+    'display': 'none' 
+});
+$('.item').css({
+    'display': 'none' 
+});
+$('.order').css({
+'display': 'none' 
+});
+$('.orderLog').css({
+    'display': 'block' 
+});
+});
+
     </script>
 </body>
 </html>
