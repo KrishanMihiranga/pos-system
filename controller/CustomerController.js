@@ -2,6 +2,11 @@ import {Customer} from "../model/Customer.js";
 import {customer_db} from "../db/db.js";
 let row_index = null;
 
+const customerIdRegex = /C\d{3}/;
+const customerName = /^[A-Za-z]+ [A-Za-z]+$/;
+const customerAddress = /^[A-Za-z\s]+$/i;
+const customerSalary = /^[0-9]\d*$/;
+
 //load table
 const LoadCustomerData = ()=>{
     $(`#cusTable`).empty();
@@ -27,12 +32,25 @@ $(`#add-customer`).on('click', ()=>{
     let cusAddress = $('#cusAddress').val();
     let cusSalary = $('#cusSalary').val();
     
-    let customerObj = new Customer(cusId, cusName, cusAddress, cusSalary);
-    customer_db.push(customerObj);
 
-    console.log(customer_db);
-    LoadCustomerData();
-    $(`#reset-customer`).click();
+    let val = validateValues(cusId, cusName, cusAddress, cusSalary);
+    if(val){
+        let customerObj = new Customer(cusId, cusName, cusAddress, cusSalary);
+        customer_db.push(customerObj);
+        LoadCustomerData();
+        $(`#reset-customer`).click();
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }else{
+        return;
+    }
+    
+    
 });
 //update customer
 $(`#btn-update-customer`).on('click', ()=>{
@@ -41,45 +59,95 @@ $(`#btn-update-customer`).on('click', ()=>{
     let cusAddress = $('#cusAddress').val();
     let cusSalary = $('#cusSalary').val();
 
-    let customerObj = new Customer(cusId, cusName, cusAddress, cusSalary);
-    //find item index
-    //let index = customer_db.findIndex(customer => customer.cusId == cusId);
+    let val = validateValues(cusId, cusName, cusAddress, cusSalary);
+    if(val){
+        let customerObj = new Customer(cusId, cusName, cusAddress, cusSalary);
+        //update item in array
+        customer_db[row_index] = customerObj;
+        LoadCustomerData();
+        $(`#reset-customer`).click();
+        row_index = null;
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Your work has been saved',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }else{
+        return;
+    }
+
     
-    //update item in array
-    customer_db[row_index] = customerObj;
-
-    LoadCustomerData();
-    $(`#reset-customer`).click();
-
-    row_index = null;
 });
 //delete customer
 $(`#btn-delete-customer`).on('click', ()=>{
-    let cusId = $('#cusId').val();
-    //find item index
-    let index = customer_db.findIndex(item =>item.cusId == cusId);
 
-    //delete item from the array
-    customer_db.splice(index, 1);
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            let cusId = $('#cusId').val();
+            //find item index
+            let index = customer_db.findIndex(item =>item.cusId == cusId);
+        
+            //delete item from the array
+            customer_db.splice(index, 1);
+        
+            LoadCustomerData();
+            $(`#reset-customer`).click();
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
+      })
 
-    LoadCustomerData();
-    $(`#reset-customer`).click();
+    
 });
 //search customer
 $('#btn-search-customer').on('click', ()=>{
-    let requestId = $('#search-customer-input').val();
-    let index = customer_db.findIndex(customer => customer.cusId == requestId);
 
-    if(index !==-1){
-        $('#cusId').val(customer_db[index].cusId);
-        $('#cusName').val(customer_db[index].cusName);
-        $('#cusAddress').val(customer_db[index].cusAddress);
-        $('#cusSalary').val(customer_db[index].cusSalary);
-        row_index = customer_db.findIndex((customer => customer.cusId == requestId));
-        $('#search-customer-input').val('');
-    }else{
-        alert('No Customer Found!');
-        $('#search-customer-input').val('');
-    }
+    let requestId = $('#search-customer-input').val();
+
+        let index = customer_db.findIndex(customer => customer.cusId == requestId);
+
+        if(index !==-1){
+            $('#cusId').val(customer_db[index].cusId);
+            $('#cusName').val(customer_db[index].cusName);
+            $('#cusAddress').val(customer_db[index].cusAddress);
+            $('#cusSalary').val(customer_db[index].cusSalary);
+            row_index = customer_db.findIndex((customer => customer.cusId == requestId));
+            $('#search-customer-input').val('');
+        }else{
+            Swal.fire('No matching Customer Found!');
+            $('#search-customer-input').val('');
+        }
+    
+    
 
 });
+//validation
+function validateValues(cusId, cusName, cusAddress, cusSalary){
+    const regexarr = [customerIdRegex, customerName, customerAddress, customerSalary];
+    const fieldsarr = [cusId, cusName, cusAddress, cusSalary];
+
+    for (let i = 0; i < regexarr.length; i++) {
+        if (!(regexarr[i].test(fieldsarr[i]))) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Invalid Data!'
+              })
+            return false;
+        }
+    }
+    return true;
+}

@@ -1,6 +1,10 @@
 import {Item} from "../model/Item.js";
 import { item_db } from "../db/db.js";
 let row_index;
+const itemCodeRegex = /I\d{3}/;
+const itemNameRegex = /^[A-Za-z\s]+$/;
+const itemPriceRegex = /^[0-9]\d*$/;
+const itemQtyRegex = /^[1-9]\d*$/;
 
 //load table
 const LoadItemData = ()=>{
@@ -27,11 +31,23 @@ $(`#item-save`).on('click', ()=>{
    let itemPrice =  $('#itemPrice').val();
    let itemQty =$('#itemQty').val();
     
+   let val = validateValues(itemId, itemName, itemPrice, itemQty);
+   if(val){
     let itemObj = new Item(itemId, itemName, itemPrice, itemQty);
     item_db.push(itemObj);
-
     LoadItemData();
     $(`#item-reset`).click();
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+    })
+   }else{
+    return;
+   }
+    
 });
 //update Item
 $(`#item-update`).on('click', ()=>{
@@ -40,20 +56,41 @@ $(`#item-update`).on('click', ()=>{
    let itemPrice =  $('#itemPrice').val();
    let itemQty =$('#itemQty').val();
 
+   let val = validateValues(itemId, itemName, itemPrice, itemQty);
+   if(val){
     let itemObj = new Item(itemId, itemName, itemPrice, itemQty);
-    //find item index
-    //let index = item_db.findIndex(item=>item.itemId == itemId);
-    
     //update item in array
     item_db[row_index] = itemObj;
 
     LoadItemData();
     $(`#item-reset`).click();
     row_index = null;
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+    })
+   }else{
+    return;
+   }
+    
 });
 //delete customer
 $(`#item-delete`).on('click', ()=>{
-    let itemID = $('#itemId').val();
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            let itemID = $('#itemId').val();
     //find item index
     let index = item_db.findIndex(item=>item.itemId == itemID);
 
@@ -62,6 +99,16 @@ $(`#item-delete`).on('click', ()=>{
 
     LoadItemData();
     $(`#item-reset`).click();
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
+      })
+
+
+    
 });
 //search Item
 $('#btn-search-item').on('click', ()=>{
@@ -77,8 +124,26 @@ $('#btn-search-item').on('click', ()=>{
         row_index = item_db.findIndex((item => item.itemId == requestId));
         $('#search-item-input').val('');
     }else{
-        alert('No Item Found!');
+        Swal.fire('No matching Customer Found!');
         $('#search-item-input').val('');
     }
 
 });
+
+//validation
+function validateValues(itemCode, itemName, itemPrice, itemQty){
+    const regexarr = [itemCodeRegex, itemNameRegex, itemPriceRegex, itemQtyRegex];
+    const fieldsarr = [itemCode, itemName, itemPrice, itemQty];
+
+    for (let i = 0; i < regexarr.length; i++) {
+        if (!(regexarr[i].test(fieldsarr[i]))) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Invalid Data!'
+              })
+            return false;
+        }
+    }
+    return true;
+}
