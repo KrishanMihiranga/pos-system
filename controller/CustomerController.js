@@ -2,6 +2,7 @@ import {Customer} from "../model/Customer.js";
 import {customer_db} from "../db/db.js";
 let row_index = null;
 
+
 //load table
 const LoadCustomerData = ()=>{
     $(`#cusTable`).empty();

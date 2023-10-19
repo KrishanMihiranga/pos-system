@@ -90,6 +90,7 @@ $("#add-item-btn").on('click', ()=>{
 
     cartItems.push(new Item(itemId, itemName, itemPrice , itemQty));
     LoadCart();
+    itemQty.val('');
 });
 
 var discountPercentage;
@@ -138,4 +139,6 @@ function ClearFields(){
     $("#orderCusId>button").text("select");
     $("#orderItemId>button").text("select");
     cartItems=[];
+    total = 0;
+    totalVal = 0;
 }

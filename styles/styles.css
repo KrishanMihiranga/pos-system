@@ -200,6 +200,7 @@ hr{
     bottom: -60%;
     padding: 20px 15%;
     margin-top: 5%;
+    width: 100%;
 }
 .orderLog>p{
     color: grey;
@@ -269,6 +270,9 @@ hr{
 #cusDropdownMenuButton{
     background-color: #009C51;
 } */
+#order-log-details{
+    width: 100%;
+}
 #order-pane-middle{
     gap: 10px;
 }
