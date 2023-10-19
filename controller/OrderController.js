@@ -10,6 +10,7 @@ var itemRowIndex = null;
 
 let currentOrderNumber = 1;
 
+
 function generateOrderID() {
     const orderID = `O${currentOrderNumber.toString().padStart(3, '0')}`;
     currentOrderNumber++;
@@ -96,6 +97,7 @@ $("#add-item-btn").on('click', ()=>{
 var discountPercentage;
 var totalVal;
 var discount;
+var cashValue;
 $("#discount").on('input', function(){
     discountPercentage = parseFloat($("#discount").val());
     discount = (total * (discountPercentage/100));
@@ -104,23 +106,22 @@ $("#discount").on('input', function(){
 });
 
 $("#cash").on('input', function(){
-    var cashValue = parseFloat($(this).val());
+    cashValue = parseFloat($(this).val());
     var balance = cashValue - totalVal; 
 
     $("#balance").val(balance.toFixed(2));
 });
 
 $("#order-btn").on('click', () => {
-   
-    var newOrderID = generateOrderID();
-
     
-    var orderObj = new Order(newOrderID, date, buttonText, cartItems, discount, totalVal);
-    order_db.push(orderObj);
 
+        var newOrderID = generateOrderID();
+        var orderObj = new Order(newOrderID, date, buttonText, cartItems, discount, totalVal);
+        order_db.push(orderObj);
     
-    ClearFields();
-    $("#order-id-lbl").text("Order Id : " + newOrderID);
+        ClearFields();
+        $("#order-id-lbl").text("Order Id : " + newOrderID);
+    
 });
 function ClearFields(){
     $("#orderCusName").val(null);
