@@ -1,5 +1,6 @@
 import {Item} from "../model/Item.js";
 import { item_db } from "../db/db.js";
+import { totalItemCount } from "./DashboardController.js";
 let row_index;
 const itemCodeRegex = /I\d{3}/;
 const itemNameRegex = /^[A-Za-z\s]+$/;
@@ -24,6 +25,10 @@ $(`#itemTable`).on('click', 'tr', function(){
 
     row_index = $(this).index();
 });
+
+function isDuplicatedItemId(itemId){
+    return item_db.some(item => item.itemId === itemId);
+}
 //add Item
 $(`#item-save`).on('click', ()=>{
    let itemId = $('#itemId').val();
@@ -31,22 +36,34 @@ $(`#item-save`).on('click', ()=>{
    let itemPrice =  $('#itemPrice').val();
    let itemQty =$('#itemQty').val();
     
-   let val = validateValues(itemId, itemName, itemPrice, itemQty);
-   if(val){
-    let itemObj = new Item(itemId, itemName, itemPrice, itemQty);
-    item_db.push(itemObj);
-    LoadItemData();
-    $(`#item-reset`).click();
+   if(isDuplicatedItemId(itemId)){
     Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500
-    })
+        icon: 'error',
+        title: 'Oops...',
+        text: 'The Item Code you entered already in use!'
+      })
    }else{
-    return;
+    let val = validateValues(itemId, itemName, itemPrice, itemQty);
+    if(val){
+     let itemObj = new Item(itemId, itemName, itemPrice, itemQty);
+     item_db.push(itemObj);
+     LoadItemData();
+     $(`#item-reset`).click();
+ 
+     totalItemCount(item_db.length);
+ 
+     Swal.fire({
+         position: 'top-end',
+         icon: 'success',
+         title: 'Your work has been saved',
+         showConfirmButton: false,
+         timer: 1500
+     })
+    }else{
+     return;
+    }
    }
+
     
 });
 //update Item
@@ -56,25 +73,35 @@ $(`#item-update`).on('click', ()=>{
    let itemPrice =  $('#itemPrice').val();
    let itemQty =$('#itemQty').val();
 
-   let val = validateValues(itemId, itemName, itemPrice, itemQty);
-   if(val){
-    let itemObj = new Item(itemId, itemName, itemPrice, itemQty);
-    //update item in array
-    item_db[row_index] = itemObj;
+    if(isDuplicatedItemId(itemId)){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'The Item Code you entered already in use!'
+          })
+    }else{
+        let val = validateValues(itemId, itemName, itemPrice, itemQty);
+        if(val){
+         let itemObj = new Item(itemId, itemName, itemPrice, itemQty);
+         //update item in array
+         item_db[row_index] = itemObj;
+     
+         LoadItemData();
+         $(`#item-reset`).click();
+         row_index = null;
+         Swal.fire({
+             position: 'top-end',
+             icon: 'success',
+             title: 'Your work has been saved',
+             showConfirmButton: false,
+             timer: 1500
+         })
+        }else{
+         return;
+        }
+    }
 
-    LoadItemData();
-    $(`#item-reset`).click();
-    row_index = null;
-    Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500
-    })
-   }else{
-    return;
-   }
+
     
 });
 //delete customer
@@ -96,8 +123,8 @@ $(`#item-delete`).on('click', ()=>{
 
     //delete item from the array
     item_db.splice(index, 1);
-
     LoadItemData();
+    totalItemCount(item_db.length);
     $(`#item-reset`).click();
           Swal.fire(
             'Deleted!',

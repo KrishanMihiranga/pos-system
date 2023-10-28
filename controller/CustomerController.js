@@ -1,5 +1,6 @@
 import {Customer} from "../model/Customer.js";
 import {customer_db} from "../db/db.js";
+import { totalCustomerCount } from "./DashboardController.js";
 let row_index = null;
 
 const customerIdRegex = /C\d{3}/;
@@ -25,6 +26,11 @@ $(`#cusTable`).on('click', 'tr', function(){
 
     row_index = $(this).index();
 });
+
+function isDuplicatedCusId(cusId){
+    return customer_db.some(customer => customer.cusId === cusId);
+}
+
 //add customer
 $(`#add-customer`).on('click', ()=>{
     let cusId = $('#cusId').val();
@@ -32,25 +38,33 @@ $(`#add-customer`).on('click', ()=>{
     let cusAddress = $('#cusAddress').val();
     let cusSalary = $('#cusSalary').val();
     
-
-    let val = validateValues(cusId, cusName, cusAddress, cusSalary);
-    if(val){
-        let customerObj = new Customer(cusId, cusName, cusAddress, cusSalary);
-        customer_db.push(customerObj);
-        LoadCustomerData();
-        $(`#reset-customer`).click();
+    if(isDuplicatedCusId(cusId)){
         Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Your work has been saved',
-            showConfirmButton: false,
-            timer: 1500
-        })
+            icon: 'error',
+            title: 'Oops...',
+            text: 'The cusId you entered already in use!'
+          })
     }else{
-        return;
+        let val = validateValues(cusId, cusName, cusAddress, cusSalary);
+        if(val){
+            let customerObj = new Customer(cusId, cusName, cusAddress, cusSalary);
+            customer_db.push(customerObj);
+            LoadCustomerData();
+            $(`#reset-customer`).click();
+    
+            totalCustomerCount(customer_db.length);
+    
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }else{
+            return;
+        }
     }
-    
-    
 });
 //update customer
 $(`#btn-update-customer`).on('click', ()=>{
@@ -59,24 +73,33 @@ $(`#btn-update-customer`).on('click', ()=>{
     let cusAddress = $('#cusAddress').val();
     let cusSalary = $('#cusSalary').val();
 
-    let val = validateValues(cusId, cusName, cusAddress, cusSalary);
-    if(val){
-        let customerObj = new Customer(cusId, cusName, cusAddress, cusSalary);
-        //update item in array
-        customer_db[row_index] = customerObj;
-        LoadCustomerData();
-        $(`#reset-customer`).click();
-        row_index = null;
+    if(isDuplicatedCusId(cusId)){
         Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Your work has been saved',
-            showConfirmButton: false,
-            timer: 1500
-        })
+            icon: 'error',
+            title: 'Oops...',
+            text: 'The cusId you entered already in use!'
+          })
     }else{
-        return;
+        let val = validateValues(cusId, cusName, cusAddress, cusSalary);
+        if(val){
+            let customerObj = new Customer(cusId, cusName, cusAddress, cusSalary);
+            //update item in array
+            customer_db[row_index] = customerObj;
+            LoadCustomerData();
+            $(`#reset-customer`).click();
+            row_index = null;
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }else{
+            return;
+        }
     }
+
 
     
 });
@@ -102,6 +125,8 @@ $(`#btn-delete-customer`).on('click', ()=>{
         
             LoadCustomerData();
             $(`#reset-customer`).click();
+            totalCustomerCount(customer_db.length);
+
           Swal.fire(
             'Deleted!',
             'Your file has been deleted.',

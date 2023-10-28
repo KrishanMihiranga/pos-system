@@ -31,8 +31,10 @@
     <div class="dashboard">
         <div class="container">
             <div class="row">
+                
                 <div class="col col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
                     <div class="card-TC">
+                        <h1 id="total-customers"></h1>
                         <p>Total Customers</p>
                         <div id="TC-footer"></div>
                     </div>
@@ -40,12 +42,14 @@
                 </div>
                 <div class="col col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
                     <div class="card-TI">
+                        <h1 id="total-Items"></h1>
                         <p>Total Items</p>
                         <div id="TI-footer"></div>
                     </div>
                 </div>
                 <div class="col col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
                     <div class="card-TO">
+                        <h1 id="total-Orders"></h1>
                         <p>Total Orders</p>
                         <div id="TO-footer"></div>
                     </div>
@@ -55,7 +59,7 @@
             <div class="row">
                 <div class="col col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="timeCard">
-
+                        <label id="digitalTimeLabel"></label>
                     </div>
                 </div>
             </div>
@@ -479,6 +483,7 @@
     <script type="module" src="controller/ItemController.js"></script>
     <script type="module" src="controller/OrderController.js"></script>
     <script type="module" src="controller/OrderLogController.js"></script>
+    <script type="module" src="controller/DashboardController.js"></script>
     
     <script>  
     

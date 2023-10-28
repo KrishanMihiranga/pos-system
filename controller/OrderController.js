@@ -4,6 +4,7 @@ import {customer_db} from "../db/db.js";
 import {item_db} from "../db/db.js";
 import {Customer} from "../model/Customer.js";
 import { Item } from "../model/Item.js";
+import { totalOrderCount } from "./DashboardController.js";
 
 var customerRowIndex = null;
 var itemRowIndex = null;
@@ -82,16 +83,26 @@ $("#add-item-btn").on('click', ()=>{
     var itemQtyOnHand = parseFloat($("#qty-on-hand").val());
     var itemQty = parseFloat($("#orderItemQty").val());
  
-    var itemTotal = itemPrice * itemQty;
-    total += itemTotal;
-    $("#subTotal").text("Sub Total: " + total);
+    if(itemQtyOnHand < itemQty){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Not enough items!'
+          })
+    }else{
+        var itemTotal = itemPrice * itemQty;
+        total += itemTotal;
+        $("#subTotal").text("Sub Total: " + total);
+    
+        item_db[itemRowIndex].itemQty= itemQtyOnHand - itemQty
+        $("#qty-on-hand").val(item_db[itemRowIndex].itemQty);
+    
+        cartItems.push(new Item(itemId, itemName, itemPrice , itemQty));
+        LoadCart();
+        itemQty.val('');
+    }
 
-    item_db[itemRowIndex].itemQty= itemQtyOnHand - itemQty
-    $("#qty-on-hand").val(item_db[itemRowIndex].itemQty);
-
-    cartItems.push(new Item(itemId, itemName, itemPrice , itemQty));
-    LoadCart();
-    itemQty.val('');
+    
 });
 
 var discountPercentage;
@@ -113,15 +124,13 @@ $("#cash").on('input', function(){
 });
 
 $("#order-btn").on('click', () => {
-    
-
         var newOrderID = generateOrderID();
         var orderObj = new Order(newOrderID, date, buttonText, cartItems, discount, totalVal);
         order_db.push(orderObj);
-    
+        totalOrderCount(order_db.length);
         ClearFields();
         $("#order-id-lbl").text("Order Id : " + newOrderID);
-    
+
 });
 function ClearFields(){
     $("#orderCusName").val(null);
