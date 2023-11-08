@@ -74,12 +74,6 @@ $(`#btn-update-customer`).on('click', ()=>{
     let cusSalary = $('#cusSalary').val();
 
     if(isDuplicatedCusId(cusId)){
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'The cusId you entered already in use!'
-          })
-    }else{
         let val = validateValues(cusId, cusName, cusAddress, cusSalary);
         if(val){
             let customerObj = new Customer(cusId, cusName, cusAddress, cusSalary);
@@ -98,6 +92,13 @@ $(`#btn-update-customer`).on('click', ()=>{
         }else{
             return;
         }
+    }else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'The cusId you entered already in use!'
+          })
+        
     }
 
 

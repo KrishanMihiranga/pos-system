@@ -74,12 +74,6 @@ $(`#item-update`).on('click', ()=>{
    let itemQty =$('#itemQty').val();
 
     if(isDuplicatedItemId(itemId)){
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'The Item Code you entered already in use!'
-          })
-    }else{
         let val = validateValues(itemId, itemName, itemPrice, itemQty);
         if(val){
          let itemObj = new Item(itemId, itemName, itemPrice, itemQty);
@@ -99,6 +93,13 @@ $(`#item-update`).on('click', ()=>{
         }else{
          return;
         }
+    }else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'The Item Code you entered already in use!'
+          })
+        
     }
 
 
