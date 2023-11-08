@@ -96,7 +96,7 @@ $(`#btn-update-customer`).on('click', ()=>{
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'The cusId you entered already in use!'
+            text: 'The cusId you entered did not exist!'
           })
         
     }

@@ -97,7 +97,7 @@ $(`#item-update`).on('click', ()=>{
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'The Item Code you entered already in use!'
+            text: 'The Item Code you entered did not exist!'
           })
         
     }
